@@ -1,5 +1,6 @@
 import { CustomProperty } from "./CustomProperty";
 import { Navigation } from "./Navigation";
+import { Tag } from "./Tag";
 
 export type Platform = {
   title: string;
@@ -14,6 +15,7 @@ export type Platform = {
   codeinjection_head?: string;
   codeinjection_foot?: string;
   navigation?: Navigation[];
+  tags?: Tag[];
   timezone?: string;
   locale?: string;
   meta_title?: string;
