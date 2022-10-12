@@ -5,5 +5,5 @@ export type Post = {
   id: string;
   content: PostContent;
   type: PostTypeEnum;
-  tags: string;
+  tags?: string[];
 };

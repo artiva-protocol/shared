@@ -14,7 +14,8 @@ export type EditionContractLike = {
   contractInfo?: {
     name: string;
     description: string;
-    image: string;
+    imageURI: string;
+    animationURI: string;
     media?: string;
   };
   salesConfig: {

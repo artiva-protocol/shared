@@ -3,6 +3,7 @@ import useSWR, { SWRConfiguration } from "swr";
 import useStrategy from "./useStrategy";
 import merge from "deepmerge";
 import { NFTStrategy } from "@zoralabs/nft-hooks/dist/strategies";
+import { NFTObject } from "@zoralabs/nft-hooks";
 
 const useNFT = (
   identifier?: NFTIdentifier,
@@ -41,7 +42,7 @@ const useNFT = (
   return {
     data:
       nftData || nftMarketData
-        ? merge(nftData || {}, nftMarketData || {})
+        ? (merge(nftData || {}, nftMarketData || {}) as NFTObject)
         : undefined,
     currencyLoaded: false,
     error: nftError,

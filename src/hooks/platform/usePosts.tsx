@@ -8,12 +8,27 @@ export type UsePostsType = {
   data?: Post[];
 };
 
-const usePosts = (): UsePostsType => {
+export type UsePostsProps = {
+  tag?: string;
+  featured?: boolean;
+};
+
+const usePosts = (props?: UsePostsProps): UsePostsType => {
   const { serverURL } = useContext(SharedConfigContext);
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
-  const { data } = useSWR(`${serverURL}/platform/posts`, fetcher, {
-    refreshInterval: 2000000,
-  });
+  const { data } = useSWR(
+    `${serverURL}/platform/posts${
+      props?.featured
+        ? `?featured=true`
+        : props?.tag
+        ? `?tag=${props?.tag}`
+        : ""
+    }`,
+    fetcher,
+    {
+      refreshInterval: 2000000,
+    }
+  );
 
   return { data: data?.posts };
 };
