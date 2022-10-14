@@ -1,5 +1,5 @@
 import { Navigation } from "../types";
-import { useRouter } from "next/router";
+import Link from "next/link";
 
 export type NavProps = {
   navigation: Navigation[];
@@ -7,16 +7,10 @@ export type NavProps = {
 };
 
 const Nav: React.FC<NavProps> = ({ navigation, className }: NavProps) => {
-  const router = useRouter();
   const elements = navigation.map((x) => (
-    <button
-      className={className}
-      onClick={() => {
-        router.push(x.url);
-      }}
-    >
-      {x.label}
-    </button>
+    <Link href={x.url}>
+      <a className={className}>{x.label}</a>
+    </Link>
   ));
 
   return <div className="flex">{elements}</div>;

@@ -1,5 +1,6 @@
 import { CustomProperty } from "./CustomProperty";
 import { Navigation } from "./Navigation";
+import { PostOrder } from "./PostOrder";
 import { Tag } from "./Tag";
 
 export type Platform = {
@@ -10,12 +11,11 @@ export type Platform = {
   themeURL?: string;
   accent_color?: string;
   cover_image?: string;
-  twitter?: string;
-  instagram?: string;
   codeinjection_head?: string;
   codeinjection_foot?: string;
   navigation?: Navigation[];
   tags?: Tag[];
+  order?: PostOrder[];
   timezone?: string;
   locale?: string;
   meta_title?: string;

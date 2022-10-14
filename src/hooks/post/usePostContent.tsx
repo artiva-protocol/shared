@@ -3,8 +3,8 @@ import useNFTContract, { NFTContractIdentifier } from "../nft/useNFTContract";
 import { PostContent } from "../../types/posts/PostContent";
 import { PostTypeEnum } from "../../types/posts/PostTypeEnum";
 import { NFTObject } from "@zoralabs/nft-hooks";
-import { NFTContractObject } from "src/types/nft/NFTContractObject";
-import { NFTIdentifier } from "src/types";
+import { NFTContractObject } from "../../types/nft/NFTContractObject";
+import { NFTIdentifier } from "../../types";
 
 const usePostContent = (
   type?: PostTypeEnum,

@@ -26,8 +26,6 @@ const useNFTContract = (
   // Fetch strategy
   const strategy = useContractStrategy(identifier?.chain);
 
-  console.log("props", { strategy, contractAddress });
-
   // Fetch media data
   const { data: nftContractData, error: nftError } = useSWR(
     strategy && contractAddress
@@ -37,8 +35,6 @@ const useNFTContract = (
       strategy.fetchNFTContract(address),
     options
   );
-
-  console.log("data", { nftContractData, nftError });
 
   // Fetch market data (if needed)
   const { data: nftContractMarketData, error: nftMarketError } = useSWR(

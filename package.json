@@ -1,6 +1,6 @@
 {
   "name": "@artiva/shared",
-  "version": "0.1.18",
+  "version": "0.1.36",
   "description": "Shared modules for Artiva",
   "author": "Artiva",
   "license": "MIT",
@@ -47,6 +47,7 @@
     "clean": "rm -rf ./dist",
     "prepack": "yarn clean && tsc",
     "build": "yarn run prepack",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "publish": "npm publish --access public"
   }
 }

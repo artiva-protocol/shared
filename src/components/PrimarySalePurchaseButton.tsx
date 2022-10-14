@@ -26,9 +26,7 @@ const PrimarySalePurchaseButton = ({
     saleAdapter?.connect(signer, address);
     saleAdapter?.purchase(
       quantity,
-      ethers.utils
-        .parseEther(primarySale.salesConfig.publicSalePrice)
-        .mul(quantity)
+      ethers.utils.parseEther(primarySale.price.toString()).mul(quantity)
     );
   };
 
