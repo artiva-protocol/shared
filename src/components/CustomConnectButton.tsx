@@ -1,5 +1,3 @@
-import * as _ from "lodash";
-
 export type CustomConnectButtonProps = {
   className: string;
   connectWalletText?: string;

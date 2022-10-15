@@ -1,5 +1,8 @@
-import { Fragment, useContext, useMemo } from "react";
-import type { RenderRequest } from "../types/adapters/RendererConfig";
+import { Fragment, useContext, useMemo, useState } from "react";
+import type {
+  RendererConfig,
+  RenderRequest,
+} from "../types/adapters/RendererConfig";
 import { NFTObject, useNFTContent } from "@zoralabs/nft-hooks";
 import SharedConfigContext from "../context/SharedConfigContext";
 
@@ -47,14 +50,21 @@ const NFTRenderer: React.FC<NFTRenderer> = ({
     renderingContext,
   };
 
-  const renderingInfo = useMemo(() => {
-    if (!renderers) return;
-    const sortedRenderers = renderers.sort((a, b) =>
-      a.getRenderingPreference(request) > b.getRenderingPreference(request)
-        ? -1
-        : 1
-    );
-    return sortedRenderers[0];
+  const [renderingInfo, setRenderingInfo] = useState<
+    RendererConfig | undefined
+  >();
+
+  useMemo(() => {
+    const handler = async () => {
+      if (!renderers) return;
+      const sortedRenderers = (await renderers).sort((a, b) =>
+        a.getRenderingPreference(request) > b.getRenderingPreference(request)
+          ? -1
+          : 1
+      );
+      setRenderingInfo(sortedRenderers[0]);
+    };
+    handler();
   }, [renderers, nft.metadata, nft.nft?.contentURI, mediaType.content]);
 
   if (renderingInfo) {

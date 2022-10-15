@@ -11,11 +11,13 @@ export type SharedConfigType = {
   preferredIPFSGateway?: string;
   zoraAPIKey?: string;
   platformAddress?: string;
-  getNFTStrategy?: (chainId: ChainIdentifier) => NFTStrategy;
-  getNFTContractStrategy?: (chainId: ChainIdentifier) => NFTContractStrategy;
-  marketAdapters?: IMarketAdapter[];
-  primarySaleAdapters?: IPrimarySaleAdapter[];
-  renderers?: RendererConfig[];
+  getNFTStrategy?: (chainId: ChainIdentifier) => Promise<NFTStrategy>;
+  getNFTContractStrategy?: (
+    chainId: ChainIdentifier
+  ) => Promise<NFTContractStrategy>;
+  marketAdapters?: Promise<IMarketAdapter[]>;
+  primarySaleAdapters?: Promise<IPrimarySaleAdapter[]>;
+  renderers?: Promise<RendererConfig[]>;
 };
 
 export default createContext<SharedConfigType>({});
