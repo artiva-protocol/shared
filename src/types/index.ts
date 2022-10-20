@@ -1,6 +1,5 @@
 export type {
   HomeProps,
-  PostProps,
   NFTContractProps,
   NFTProps,
   ThemeConfig,

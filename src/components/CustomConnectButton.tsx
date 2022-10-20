@@ -1,6 +1,10 @@
+export declare type AuthenticationStatus =
+  | "loading"
+  | "unauthenticated"
+  | "authenticated";
+
 export type CustomConnectButtonProps = {
   className: string;
-  connectWalletText?: string;
   account?: {
     address: string;
     balanceDecimals?: number;
@@ -21,6 +25,7 @@ export type CustomConnectButtonProps = {
     unsupported?: boolean;
   };
   mounted: boolean;
+  authenticationStatus?: AuthenticationStatus;
   openAccountModal: () => void;
   openChainModal: () => void;
   openConnectModal: () => void;
@@ -31,34 +36,41 @@ export type CustomConnectButtonProps = {
 
 const CustomConnectButton: React.FC<CustomConnectButtonProps> = ({
   className,
-  mounted,
-  account,
-  openConnectModal,
   chain,
-  openChainModal,
   openAccountModal,
-  connectWalletText,
+  openChainModal,
+  openConnectModal,
+  authenticationStatus,
+  account,
+  mounted,
 }: CustomConnectButtonProps) => {
+  // Note: If your app doesn't use authentication, you
+  // can remove all 'authenticationStatus' checks
+  const ready = mounted && authenticationStatus !== "loading";
+  const connected =
+    ready &&
+    account &&
+    chain &&
+    (!authenticationStatus || authenticationStatus === "authenticated");
+
   return (
     <div
-      {...(!mounted && {
-        "aria-hidden": true,
+      {...(!ready && {
         style: {
-          opacity: 0,
           pointerEvents: "none",
           userSelect: "none",
         },
       })}
     >
       {(() => {
-        if (!mounted || !account || !chain) {
+        if (!connected) {
           return (
             <button
               className={className}
               onClick={openConnectModal}
               type="button"
             >
-              {connectWalletText || "Connect Wallet"}
+              Connect Wallet
             </button>
           );
         }
@@ -74,6 +86,7 @@ const CustomConnectButton: React.FC<CustomConnectButtonProps> = ({
             </button>
           );
         }
+
         return (
           <button
             className={className}

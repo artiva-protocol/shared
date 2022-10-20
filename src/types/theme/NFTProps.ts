@@ -1,9 +1,9 @@
 import { NFTObject } from "@zoralabs/nft-hooks";
+import { PlatformThemeType } from ".";
 import { ArtivaContextType } from "../../context/ArtivaContext";
-import { Platform } from "../metadata";
 
 export type NFTProps = {
   ctx: ArtivaContextType;
-  platform: Platform;
+  platform: PlatformThemeType;
   nft?: NFTObject;
 };

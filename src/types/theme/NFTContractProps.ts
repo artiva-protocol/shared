@@ -1,9 +1,9 @@
+import { PlatformThemeType } from ".";
 import { ArtivaContextType } from "../../context/ArtivaContext";
-import { Platform } from "../metadata";
-import { NFTContractObject } from "../nft/NFTContractObject";
+import { NFTContractObject } from "../nft";
 
 export type NFTContractProps = {
   ctx: ArtivaContextType;
-  platform: Platform;
+  platform: PlatformThemeType;
   nftContract?: NFTContractObject;
 };
