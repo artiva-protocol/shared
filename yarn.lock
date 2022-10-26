@@ -948,7 +948,7 @@
   dependencies:
     "@walletconnect/window-getters" "^1.0.0"
 
-"@zoralabs/nft-hooks@^1.1.10":
+"@zoralabs/nft-hooks@^1.1.7":
   version "1.1.10"
   resolved "https://registry.yarnpkg.com/@zoralabs/nft-hooks/-/nft-hooks-1.1.10.tgz#b746144a26cfee8c0651aa06fb096aed78c671b1"
   integrity sha512-FRHCnlMBpZ9+dl8m9lfmcRrLo74Tw+7updAvRTJpQVzqxHU5UcfEJwGGvuQp8kRUeY6HDKEbphdOvUaSMlkDyQ==

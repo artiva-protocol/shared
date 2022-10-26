@@ -6,6 +6,8 @@ const useObserver = () => {
   const [enabled, setEnabledValue] = useState(false);
   const [intersecting, setIntersecting] = useState(false);
 
+  console.log("loaderElementRef shared", loaderElementRef);
+
   useEffect(() => {
     observer.current = new IntersectionObserver((entry) => {
       entry.map((x) => {
@@ -17,13 +19,19 @@ const useObserver = () => {
   }, []);
 
   const setEnabled = (value: boolean) => {
-    if (value) observer.current?.observe(loaderElementRef.current);
-    else {
+    setEnabledValue(value);
+  };
+
+  useEffect(() => {
+    if (!loaderElementRef) return;
+
+    if (enabled && loaderElementRef.current) {
+      observer.current?.observe(loaderElementRef.current);
+    } else {
       observer.current?.unobserve(loaderElementRef.current);
       setIntersecting(false);
     }
-    setEnabledValue(value);
-  };
+  }, [enabled, loaderElementRef]);
 
   return {
     setEnabled,
