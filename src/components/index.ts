@@ -7,6 +7,7 @@ import Nav from "./Nav";
 import NFTRenderer from "./NFTRenderer";
 import { PricingString } from "./PricingString";
 import PrimarySalePurchaseButton from "./PrimarySalePurchaseButton";
+
 import DefaultComponents from "./DefaultComponents";
 
 export {

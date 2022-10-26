@@ -11,6 +11,11 @@ import useZDK from "./nft/useZDK";
 import useMetadata from "./platform/useMetadata";
 import usePosts from "./platform/usePosts";
 import usePrimarySale from "./primary-sale/usePrimarySale";
+import useObserver from "./utils/useObserver";
+import useInfinitePosts from "./infinite/useInfinitePosts";
+import useInfiniteTokens from "./infinite/useInfiniteTokens";
+import useInfiniteMints from "./infinite/useInfiniteMints";
+
 import DefaultHooks from "./DefaultHooks";
 
 export {
@@ -26,6 +31,10 @@ export {
   useZDK,
   useMetadata,
   usePosts,
+  useInfinitePosts,
+  useInfiniteTokens,
+  useInfiniteMints,
+  useObserver,
   usePrimarySale,
   DefaultHooks,
 };

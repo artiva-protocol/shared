@@ -1,35 +1,63 @@
 import useZDK from "./useZDK";
-import useSWR from "swr";
+import useSWRInfinite from "swr/infinite";
 import {
   SortDirection,
   TokenSortKey,
+  PageInfo,
+  TokenWithMarketsSummary,
 } from "@zoralabs/zdk/dist/queries/queries-sdk";
 
-export type useNFTTokensProps = {
+export type UseNFTTokensProps = {
   collectionAddresses?: string[];
   ownerAddresses?: string[];
-  after?: string;
   limit?: number;
+  after?: any;
+  onSuccess?: (data: any[]) => void;
 };
 
-const useNFTTokens = (props: useNFTTokensProps) => {
+const useNFTTokens = (props: UseNFTTokensProps) => {
   const zdk = useZDK();
 
-  const swrProps =
-    props.collectionAddresses || props.ownerAddresses
-      ? ["zdk-tokens", JSON.stringify(props)]
-      : null;
+  const defaultParams = [
+    "zdk-tokens",
+    props.collectionAddresses,
+    props.ownerAddresses,
+    props.limit,
+  ];
 
-  const fetcher = (_: any) =>
+  const getKey = (
+    idx: number,
+    prev: { tokens: TokenWithMarketsSummary; page: PageInfo } | undefined
+  ) => {
+    if (
+      (prev && !prev.tokens) ||
+      (!props.collectionAddresses && !props.ownerAddresses)
+    )
+      return null;
+
+    if (idx === 0) return [...defaultParams, null];
+
+    return prev?.page.endCursor
+      ? [...defaultParams, prev.page.endCursor]
+      : [...defaultParams, null];
+  };
+
+  const fetcher = (
+    _: string,
+    collectionAddresses: string[],
+    ownerAddresses: string[],
+    limit?: number,
+    after?: string
+  ) =>
     zdk
       .tokens({
         where: {
-          collectionAddresses: props.collectionAddresses,
-          ownerAddresses: props.ownerAddresses,
+          collectionAddresses: collectionAddresses,
+          ownerAddresses: ownerAddresses,
         },
         pagination: {
-          limit: props.limit,
-          after: props.after,
+          limit: limit,
+          after: after,
         },
         sort: {
           sortKey: TokenSortKey.Minted,
@@ -40,7 +68,13 @@ const useNFTTokens = (props: useNFTTokensProps) => {
       })
       .then((x) => ({ tokens: x.tokens.nodes, page: x.tokens.pageInfo }));
 
-  return useSWR(swrProps, fetcher);
+  const swr = useSWRInfinite(getKey, fetcher, { onSuccess: props.onSuccess });
+  const { size, data } = swr;
+
+  const loading = size > (data?.length || 0);
+  const more = data ? data[data.length - 1]?.page.hasNextPage || false : true;
+
+  return { ...swr, loading, more };
 };
 
 export default useNFTTokens;
