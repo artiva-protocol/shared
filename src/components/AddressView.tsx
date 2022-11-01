@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { useMainnet } from "../hooks/utils/useMainnet";
 import { useEnsName } from "wagmi";
 const PREFIX_ADDRESS = "0x";
 
@@ -13,7 +14,10 @@ const AddressView: React.FC<AddressViewProps> = ({
   chars = 4,
   className,
 }: AddressViewProps) => {
-  const { data: ensName } = useEnsName({ address });
+  const { chainId, enabled } = useMainnet();
+  const { data: ensName } = useEnsName({ address, chainId, enabled });
+
+  console.log("ensName", ensName, address);
   if (!address) return <Fragment />;
   if (ensName) return <div className={className}>{ensName}</div>;
   return (

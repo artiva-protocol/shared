@@ -5,8 +5,14 @@ import { ChainIdentifier } from "../../types/nft/ChainIdentifier";
 
 export interface IMarketAdapter {
   connect(signerOrProvider: Signer | Provider, chain: ChainIdentifier): void;
-  placeBid(nft: NFTObject, amount: BigNumberish): Promise<ContractTransaction>;
-  fillAsk(nft: NFTObject, finder: BigNumberish): Promise<ContractTransaction>;
-  offer(nft: NFTObject): Promise<ContractTransaction>;
+  placeBid(
+    nft: NFTObject,
+    amount: BigNumberish
+  ): Promise<ContractTransaction | boolean>;
+  fillAsk(
+    nft: NFTObject,
+    finder: BigNumberish
+  ): Promise<ContractTransaction | boolean>;
+  offer(nft: NFTObject): Promise<ContractTransaction | boolean>;
   enabled(nft: NFTObject): boolean;
 }

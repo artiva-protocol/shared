@@ -10,7 +10,7 @@ const AvatarView: React.FC<AvatarViewProps> = ({
   address,
   className,
 }: AvatarViewProps) => {
-  const { data } = useEnsAvatar({ addressOrName: address });
+  const { data } = useEnsAvatar({ addressOrName: address, chainId: 1 });
   return <img className={className} src={data || makeBlockie(address)} />;
 };
 
