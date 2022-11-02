@@ -1,10 +1,10 @@
 import useNFT from "./nft/useNFT";
 import useMarket from "./market/useMarket";
-import useFindAsk from "./nft/useFindAsk";
-import useFindAuction from "./nft/useFindAuction";
+import useFindAsk from "./market/useFindAsk";
+import useFindAuction from "./market/useFindAuction";
 import useStrategy from "./nft/useStrategy";
 import usePostContent from "./post/usePostContent";
-import useNFTContract from "./nft/useNFTContract";
+import useNFTContract from "./nft-contract/useNFTContract";
 import useNFTMints from "./nft/useNFTMints";
 import useNFTTokens from "./nft/useNFTTokens";
 import useZDK from "./nft/useZDK";
@@ -15,6 +15,8 @@ import useObserver from "./utils/useObserver";
 import useInfinitePosts from "./infinite/useInfinitePosts";
 import useInfiniteTokens from "./infinite/useInfiniteTokens";
 import useInfiniteMints from "./infinite/useInfiniteMints";
+import useNFTContractSecondary from "./nft-contract/useNFTContractSecondary";
+import useNFTSecondary from "./nft/useNFTSecondary";
 
 import DefaultHooks from "./DefaultHooks";
 
@@ -36,5 +38,7 @@ export {
   useInfiniteMints,
   useObserver,
   usePrimarySale,
+  useNFTContractSecondary,
+  useNFTSecondary,
   DefaultHooks,
 };

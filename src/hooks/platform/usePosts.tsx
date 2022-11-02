@@ -44,7 +44,9 @@ const usePosts = ({
     return [baseURL, { ...baseParams, page: idx }];
   };
 
-  const swr = useSWRInfinite<Post[]>(getKey, fetcher, { onSuccess });
+  const swr = useSWRInfinite<Post[]>(getKey, fetcher, {
+    onSuccess,
+  });
   const { size, data } = swr;
 
   const loading = size > (data?.length || 0);

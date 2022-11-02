@@ -1,34 +1,13 @@
-import useNFT from "../nft/useNFT";
-import useNFTContract, { NFTContractIdentifier } from "../nft/useNFTContract";
-import { PostContent } from "../../types/posts/PostContent";
-import { PostTypeEnum } from "../../types/posts/PostTypeEnum";
-import { NFTObject } from "@zoralabs/nft-hooks";
-import { NFTContractObject } from "../../types/nft/NFTContractObject";
-import { NFTIdentifier } from "../../types";
+import { Post } from "../../types";
+import useSWR from "swr";
+import axios from "axios";
+import { PostData } from "src/types/posts/PostData";
 
-const usePostContent = (
-  type?: PostTypeEnum,
-  content?: PostContent
-): {
-  nft: NFTObject | undefined;
-  nftContract: NFTContractObject | undefined;
-} => {
-  const { data: nft } = useNFT(
-    type === PostTypeEnum.NFT && content
-      ? (content as NFTIdentifier)
-      : undefined
-  );
+const usePostContent = (post: Post) => {
+  const fetch = (url: string, data: Post) =>
+    axios.post<PostData>(url, { post: data }).then((x) => x.data);
 
-  const { data: nftContract } = useNFTContract(
-    type === PostTypeEnum.NFT_CONTRACT && content
-      ? (content as NFTContractIdentifier)
-      : undefined
-  );
-
-  return {
-    nft: nft as NFTObject | undefined,
-    nftContract: nftContract as NFTContractObject | undefined,
-  };
+  return useSWR(["/api/post/data", post], fetch);
 };
 
 export default usePostContent;
