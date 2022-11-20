@@ -1,5 +1,6 @@
 import { Navigation } from "../types";
 import Link from "next/link";
+import { Fragment } from "react";
 
 export type NavProps = {
   navigation: Navigation[];
@@ -13,7 +14,7 @@ const Nav: React.FC<NavProps> = ({ navigation, className }: NavProps) => {
     </Link>
   ));
 
-  return <div className="flex">{elements}</div>;
+  return <Fragment>{elements}</Fragment>;
 };
 
 export default Nav;

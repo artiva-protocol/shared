@@ -17,6 +17,8 @@ import useInfiniteTokens from "./infinite/useInfiniteTokens";
 import useInfiniteMints from "./infinite/useInfiniteMints";
 import useNFTContractSecondary from "./nft-contract/useNFTContractSecondary";
 import useNFTSecondary from "./nft/useNFTSecondary";
+import useTagData from "./tag/useTagData";
+import { useNFTContent } from "@zoralabs/nft-hooks";
 
 import DefaultHooks from "./DefaultHooks";
 
@@ -40,5 +42,7 @@ export {
   usePrimarySale,
   useNFTContractSecondary,
   useNFTSecondary,
+  useNFTContent,
+  useTagData,
   DefaultHooks,
 };

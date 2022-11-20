@@ -5,6 +5,7 @@ export declare type AuthenticationStatus =
 
 export type CustomConnectButtonProps = {
   className: string;
+  forceChain?: boolean;
   account?: {
     address: string;
     balanceDecimals?: number;
@@ -36,6 +37,7 @@ export type CustomConnectButtonProps = {
 
 const CustomConnectButton: React.FC<CustomConnectButtonProps> = ({
   className,
+  forceChain = true,
   chain,
   openAccountModal,
   openChainModal,
@@ -75,7 +77,7 @@ const CustomConnectButton: React.FC<CustomConnectButtonProps> = ({
           );
         }
 
-        if (chain.unsupported) {
+        if (forceChain && chain.unsupported) {
           return (
             <button
               className={className}
