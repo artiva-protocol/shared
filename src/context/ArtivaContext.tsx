@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { Container } from "unstated-next";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import Image from "next/future/image";
+import Image from "next/image";
 import Link from "next/link";
 import components from "../components/DefaultComponents";
 import hooks from "../hooks/DefaultHooks";

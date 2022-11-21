@@ -9,8 +9,8 @@ export type NavProps = {
 
 const Nav: React.FC<NavProps> = ({ navigation, className }: NavProps) => {
   const elements = navigation.map((x) => (
-    <Link href={x.url}>
-      <a className={className}>{x.label}</a>
+    <Link href={x.url} className={className}>
+      {x.label}
     </Link>
   ));
 
